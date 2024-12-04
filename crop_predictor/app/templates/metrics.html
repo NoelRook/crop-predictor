@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<!-- Indoor Farming Page -->
+<div class="container mt-5">
+
+  <!-- Page Header -->
+  <div class="text-center mb-4">
+    <h1 class="h3 text-success font-weight-bold">Exploring Indoor Farming and Predictive Models</h1>
+    <p class="text-muted">Discover how technology is transforming agriculture and enabling data-driven farming!</p>
+  </div>
+
+  <!-- Regression Graph Section -->
+  <div class="text-center mt-5">
+    <h3 class="h4 text-success">Linear Regression Prediction: Crop Yield Analysis</h3>
+    <p class="text-muted">Our prediction model demonstrates high accuracy in estimating crop yields based on environmental factors.</p>
+    <div class="d-flex justify-content-center mt-3">
+      <img src="/regression-plot" alt="Linear Regression" class="img-fluid shadow-lg rounded" style="max-width: 70%;">
+    </div>
+    <p class="mt-4">
+      By comparing the predicted values (orange) with actual values (blue), we observe strong alignment, 
+      making this model highly reliable for practical use in indoor farming. This allows farmers to optimize
+      resource usage and improve productivity effectively.
+    </p>
+  </div>
+
+  <!-- Indoor Farming Information Section -->
+  <div class="row mt-5">
+    <!-- Introduction Section -->
+    <div class="col-md-6">
+      <img src="{{ url_for('static', filename='indoor farming.jpg') }}" alt="Indoor Farming" class="img-fluid shadow-lg rounded">
+    </div>
+    <div class="col-md-6 d-flex flex-column justify-content-center">
+      <h2 class="h5 text-primary">What is Indoor Farming?</h2>
+      <p>
+        Indoor farming involves growing crops inside controlled environments such as greenhouses or vertical farms. 
+        It uses technology like LED lighting, climate control, and hydroponics to maximize crop yields while using less space and water.
+      </p>
+    </div>
+  </div>
+
+  <!-- Benefits Section -->
+  <div class="bg-light py-4 px-3 rounded shadow-lg mt-4">
+    <h2 class="h5 text-center text-success mb-4">Why Indoor Farming Matters</h2>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <i class="fas fa-seedling text-success fa-2x"></i>
+        <h4 class="h6 mt-2">Saves Resources</h4>
+        <p>Indoor farms use up to 95% less water compared to traditional farming.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fas fa-warehouse text-success fa-2x"></i>
+        <h4 class="h6 mt-2">Year-Round Production</h4>
+        <p>Grow crops regardless of the weather or season, ensuring a steady food supply.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="fas fa-leaf text-success fa-2x"></i>
+        <h4 class="h6 mt-2">Fresher Produce</h4>
+        <p>Locally grown crops mean fresher, healthier produce with minimal transport.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works Section -->
+  <div class="mt-5">
+    <h2 class="h5 text-primary text-center">How Does Indoor Farming Work?</h2>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <h4 class="h6 text-secondary">Hydroponics</h4>
+        <p>Crops are grown in nutrient-rich water, eliminating the need for soil.</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="h6 text-secondary">LED Lighting</h4>
+        <p>Specialized lights simulate sunlight, promoting plant growth indoors.</p>
+      </div>
+      <div class="col-md-4">
+        <h4 class="h6 text-secondary">Climate Control</h4>
+        <p>Temperature, humidity, and CO2 levels are optimized for crop health.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="text-center mt-5 py-4 px-3 bg-success text-white rounded shadow">
+    <h2 class="h5 mb-3">Want to Learn More?</h2>
+    <p>Explore how indoor farming and predictive models can revolutionize food production and create a sustainable future.</p>
+    <a href="https://en.wikipedia.org/wiki/Vertical_farming" class="btn btn-light shadow">Learn More</a>
+  </div>
+</div>
+
+{% endblock %}

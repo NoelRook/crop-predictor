@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = ">=3.0.0"
+flask-login = ">=0.6.3"
+flask-migrate = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+transcrypt = "*"
+bootstrap-flask = "*"
+importlib-resources = "*"
+colorama = "*"
+Werkzeug = "==3.0.1"
+
+pandas ="*"
+numpy ="*"
+matplotlib="*"
+seaborn = "*"
+scikit-learn ="*"
+
+
+[dev-packages]
+
+[requires]

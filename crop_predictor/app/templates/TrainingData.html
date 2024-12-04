@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="container mt-5">
+    <!-- Header Section -->
+    <div class="text-center mb-4">
+        <h1 class="display-4">Upload and Manage Training Data</h1>
+        <p class="lead">Easily upload CSV files, view your data, and reset the table as needed.</p>
+    </div>
+    <!-- Download Example CSV Section -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-info text-white">
+            <h5>Download Example CSV</h5>
+        </div>
+        <div class="card-body">
+                <p>Click the button below to download an example CSV file with the correct format.
+                    <a href="{{ url_for('download_example') }}" class="btn btn-primary float-right" >Download Example CSV</a>
+                </p>
+            
+        </div>
+    </div>
+
+    <!-- Upload CSV Section -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5>Upload a CSV File</h5>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
+                <input type="file" name="file" class="form-control me-3">
+                <button type="submit" class="btn btn-success">Upload</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Show Training Data Section -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-secondary text-white">
+            <h5>View Training Data</h5>
+        </div>
+        <div class="card-body">
+            <div class="text-center mt-5">
+                <h3 class="h4 text-success">Linear Regression Prediction: Crop Yield Analysis</h3>  
+                <p class="text-muted">Our prediction model demonstrates high accuracy in estimating crop yields based on environmental factors.</p>
+                <p class="text-muted"> The database currently contains {{length}} entries</p>
+                <div class="d-flex justify-content-center mt-3">
+                  <img src="/regression-plot" alt="Linear Regression" class="img-fluid shadow-lg rounded" style="max-width: 70%;">
+                </div>
+                <p class="mt-4">
+                  By comparing the predicted values (orange) with actual values (blue), we observe strong alignment, 
+                  making this model highly reliable for practical use in indoor farming. This allows farmers to optimize
+                  resource usage and improve productivity effectively.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reset Training Data Section -->
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h5>Reset Training Data</h5>
+        </div>
+        <div class="card-body">
+            <form action="{{ url_for('clear_training_data') }}" method="post">
+                <button type="submit" class="btn btn-danger">Clear Training Data</button>
+            </form>
+            <p class="mt-2 text-muted">Clicking this button will delete all existing training data.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

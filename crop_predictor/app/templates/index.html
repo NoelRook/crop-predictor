@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<div class="container mt-5">
+    <!-- Welcome Header -->
+    <div class="text-center">
+        <h1 class="display-3 text-primary">Hi, {{ current_user.username }}!</h1>
+        <p class="lead text-secondary">
+            Welcome to <strong>Crop Predictor</strong>, your go-to platform to plan, predict, and optimize your crop yield!
+        </p>
+    </div>
+    
+    <!-- Prediction Form Section -->
+    <div class="mt-5">
+        <h4 class="text-center text-info">Make a Prediction</h4>
+        <div class="d-flex justify-content-between align-items-start">
+            <!-- Sliders Section -->
+            <form method="POST" action="{{ url_for('index') }}" style="flex: 1; max-width: 50%;">
+                <!-- Temperature Slider -->
+                <div class="mb-4">
+                    <label for="Temperature" class="form-label">Temperature (°C): 
+                        <span id="temperature-value" class="text-primary">{{ Temperature }}</span>
+                    </label>
+                    <input type="range" id="Temperature" name="Temperature" class="form-range" min="0" max="50" step="0.1" 
+                           value="{{ Temperature }}" oninput="updateValue('Temperature', 'temperature-value')">
+                </div>
+
+                <!-- Nitrogen Slider -->
+                <div class="mb-4">
+                    <label for="Nitrogen" class="form-label">Nitrogen (kg/acre): 
+                        <span id="nitrogen-value" class="text-primary">{{ Nitrogen }}</span>
+                    </label>
+                    <input type="range" id="Nitrogen" name="Nitrogen" class="form-range" min="0" max="200" step="0.1" 
+                           value="{{ Nitrogen }}" oninput="updateValue('Nitrogen', 'nitrogen-value')">
+                </div>
+
+                <!-- Potassium Slider -->
+                <div class="mb-4">
+                    <label for="Potassium" class="form-label">Potassium (kg/acre): 
+                        <span id="potassium-value" class="text-primary">{{ Potassium }}</span>
+                    </label>
+                    <input type="range" id="Potassium" name="Potassium" class="form-range" min="0" max="200" step="0.1" 
+                           value="{{ Potassium }}" oninput="updateValue('Potassium', 'potassium-value')">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-4 py-2">Predict</button>
+                </div>
+            </form>
+
+            <!-- Prediction Result Section -->
+            
+            <div class="ms-4 text-center" style="flex: 1;">
+                {% if prediction is not none %}
+                <div id="wheat-stack" class="mt-3" style="display: none;"></div>
+                {% endif %}
+                <h2 class="text-success">Predicted Crop Yield:</h2>
+                {% if prediction is not none %}
+                <h3 id="prediction-value" class="display-5">{{ prediction }} Q/acre</h3>
+                {% endif %}
+                <audio id="wheat-sound" src="{{ url_for('static', filename='music/wheat_break.ogg') }}" preload="auto"></audio>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function updateValue(sliderId, outputId) {
+        const slider = document.getElementById(sliderId);
+        const output = document.getElementById(outputId);
+        output.textContent = slider.value;
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM fully loaded");
+    
+    const predictionValueElement = document.getElementById("prediction-value");
+    if (!predictionValueElement) {
+        console.error("Prediction value element not found!");
+        return;
+    }
+
+    const prediction = parseFloat(predictionValueElement.textContent);
+    console.log("Prediction value:", prediction);
+
+    const wheatStack = document.getElementById("wheat-stack");
+    if (!wheatStack) {
+        console.error("Wheat stack container not found!");
+        return;
+    }
+
+    // Example: Add wheat stack based on prediction
+    wheatStack.style.display = "block";
+    wheatStack.innerHTML = ""; // Clear previous
+    const wheatCount = Math.floor(prediction / 2); // 1 wheat per 2 yield
+    playWheatSound()
+    for (let i = 0; i < wheatCount; i++) {
+        const img = document.createElement("img");
+        img.src = "/static/wheat.png";
+        img.alt = "Wheat";
+        img.style.width = "50px";
+        img.style.margin = "5px";
+        wheatStack.appendChild(img);
+    }
+
+});
+function playWheatSound() {
+            var audio = document.getElementById("wheat-sound");
+            audio.play();  // Play the sound effect when the button is clicked
+        }
+
+        
+
+</script>
+{% endblock %}
